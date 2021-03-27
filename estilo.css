@@ -1,0 +1,72 @@
+/*------------------ GERAL--------------------- */
+
+body {
+    background-image: url("fundo-body.png");
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* -----------lista--------------- */
+
+section {
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+#tr1 {
+    background-color: rgb(125, 143, 143);
+}
+
+#td1 {
+    background-color: rgb(214, 183, 183);
+}
+
+#td2 {
+    background-color: rgb(206, 166, 166);
+}
+
+
+/* ------------------NAVBAR--------------------- */
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(49, 48, 48, 0.5);
+    height: 100%;
+    width: 300px;
+    overflow-y: scroll;
+}
+
+.icones {
+    text-align: center;
+    margin: 20px;
+}
+
+#icone {
+    color: white;
+    transition: width 0.5s, height 0.5s;
+}
+
+#icone:hover {
+    color: rgb(126, 223, 134);
+    width: 80px;
+    height: 80px;
+}
+
+
+/* section */
+
+section {
+    margin-left: 320px;
+}
+
+
+/* -----------------TIPOGRAFIA------------------- */
+
+p {
+    color: white;
+    font-size: 18px;
+}
