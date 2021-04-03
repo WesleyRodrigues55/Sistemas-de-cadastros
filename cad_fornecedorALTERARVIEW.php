@@ -273,8 +273,8 @@ mysqli_close($conexao);
                 <!-- chamando os botões para ações -->
                 <div style="margin: auto;">
                     <button type="submit" name="btncal" class="btn btn-lg btn-primary">Salvar</button>
-                    <button type="reset" name="btnlimpar" class="btn btn-lg btn-danger">limpar</button>
-                    <button type="button" name="btnvoltar" onclick="javascript: location.href='Index.php';" class="btn btn-lg btn-default">voltar</button>
+                    <!-- <button type="reset" name="btnlimpar" class="btn btn-lg btn-danger">limpar</button> -->
+                    <button type="button" name="btnvoltar" onclick="javascript: location.href='cad_fornecedorLISTA.php';" class="btn btn-lg btn-default">voltar</button>
                 </div>
    
             </div>
