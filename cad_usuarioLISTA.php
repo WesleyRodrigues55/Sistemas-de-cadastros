@@ -122,59 +122,148 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
 
                 <!-- caixa de pesquisa -->
                  <input class="form-control" type="search" placeholder="Pesquisar" id="pesquisa" name="pesquisa" aria-label="Search" style="width: 500px; padding: 20px;">
-                   <button class="btn btn-success ml-1" type="submit" style="padding: 7px;">
-                    <img src="search.png">
-                </button>
+                    <button class="btn btn-success ml-1" type="submit" style="padding: 7px;">
+                        <img src="search.png">
+                    </button>
 
-                <!-- botão de incluir -->
-                <div class="btn btn-info btn-lg" style="margin-left: 20px;">
-                  <a href="cad_usuarioVIEW.php" style="text-decoration: none; color: white;">
-                    Incluir</a></div>
+                    <!-- botão de incluir -->
+                    <div class="btn btn-info btn-lg" style="margin-left: 20px;">
+                        <a href="cad_usuarioVIEW.php" style="text-decoration: none; color: white;">
+                        Incluir
+                        </a>
+                    </div>
 
-              </form>
+                </form>
                 <br><br>
 
                 <!-- começo tabela -->
-            <table id="tabela" class="table">
-                <thead class="thead-dark">
-                    <tr id="tr1">
-                        <td>Código</td>
-                        <td>Nome</td>
-                        <td>Email</td>
-                        <td>Senha</td>
-                        <td>Perfil</td>
-                        <td>Ação</td>
-                    </tr>
-                </thead>
-                <?php while($dado = $con->fetch_array()) { ?>
-                <tr>
-                    <td id="td1"><?php echo $dado['id']; ?></td>
-                    <td><?php echo $dado['nome']; ?></td>
-                    <td><?php echo $dado['email']; ?></td>
-                    <td><?php echo $dado['senha']; ?></td>
-                    <td><?php echo $dado['perfil']; ?></td>
+                <table id="tabela" class="table">
+                    <thead class="thead-dark">
+                        <tr id="tr1">
+                            <td>Código</td>
+                            <td>Nome</td>
+                            <td>Email</td>
+                            <td>Senha</td>
+                            <td>Perfil</td>
+                            <td>Ação</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <?php while($dado = $con->fetch_array()) { ?>
+                        <tr>
+                            <td id="td1"><?php echo $dado['id']; ?></td>
+                            <td><?php echo $dado['nome']; ?></td>
+                            <td><?php echo $dado['email']; ?></td>
+                            <td><?php echo $dado['senha']; ?></td>
+                            <td><?php echo $dado['perfil']; ?></td>
 
-                    </td>
-                    <td> <a href="cad_usuarioALTERARVIEW.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-primary btn-alterar" role="button">
-                        <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-</svg>alterar</a>
+                            <td> <a href="cad_usuarioALTERARVIEW.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-primary btn-alterar" role="button">
+                                <svg style="margin-right: 5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                </svg>alterar</a>
+                            </td>
 
-                        <a href="cad_usuarioEXCLUIR.php?codigo=<?php echo $dado['id']; ?>" class="btn btn-danger btn-excluir" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-</svg>excluir</a>
-                    </td>
-                </tr>
-                <?php } ?>    
-            </table>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idmodal<?php echo $dado['id']; ?>" style="margin: 20px;">
+                                    Excluir
+                                </button>
+
+                                <!-- MODALLLLL -->
+                                <div class="modal fade" id="idmodal<?php echo $dado['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content" id="modal-color">
+                                            <!-- Aqui chama o título do modal -->
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Exclusão</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <!-- Aqui chama o Body dele (conteúdo) -->
+                                            <div class="modal-body">
+
+                                                <form method="post" name="usuario" action="cad_usuarioAPAGAR-LINHA.php">
+                                                    <?php
+
+                                                        //ínclui a conexão com o banco
+                                                        include_once("conexao.php");
+
+                                                        //recuperar o código(id) em GET da aba LISTA
+                                                        $codigo = $dado['id'];
+
+                                                        //Select no banco na tabela
+                                                        $sqlconsulta = "select * from usuario where id='$codigo'";
+
+                                                        //executando instruções
+                                                        $resultado = @mysqli_query($conexao, $sqlconsulta);
+                                                            if (!$resultado) {
+                                                                echo '<input> type="button" onclick="window.location='."'index.php'".';" value="Voltar"><br><br>';
+                                                                die ('<h4>Query inválida: </h4>' . @mysqli_error($conexao));
+                                                            } else {
+                                                                $num = @mysqli_num_rows($resultado);
+                                                                if ($num == 0) {
+                                                                    echo "<h4>Código: </h4> não localizado ! <br><br>";
+                                                                    echo '<input type="button" onclick="window.location='."'index.php'".';"value="Voltar"><br><br>';
+                                                                    exit;
+                                                                } else {
+                                                                $dados = mysqli_fetch_array($resultado);
+                                                            }
+                                                        }
+                                                    ?>
+
+                                                    <div class="row">      
+                                                        <!-- chamando o id -->
+                                                        <div class="col-md-2 form-group">
+                                                            <label>Código(id)</label>
+                                                            <input type="number" name="txtid" value='<?php echo $dados['id'];?>' readonly class="form-control">
+                                                        </div>
+                                                        <!-- separação -->
+                                                        <div class="col-md-11"></div>
+                                                        <!-- chamando o vlaor do nome-->
+                                                        <div class="col-md-12 form-group">
+                                                            <label>Nome</label>
+                                                            <input type="text" name="txtnome" value='<?php echo $dados['nome'];?>' readonly class="form-control">
+                                                        </div>
+                                                        <!-- chamando o valor do email -->
+                                                        <div class="col-md-12 form-group">
+                                                            <label>E-mail</label>
+                                                            <input type="email" name="txtemail" value='<?php echo $dados['email'];?>' readonly class="form-control">
+                                                        </div>
+                                                        <!-- chamando o valor da senha -->
+                                                        <div class="col-md-12 form-group">
+                                                            <label>Senha</label>
+                                                            <input type="password" name="txtsenha" value='<?php echo $dados['senha'];?>' readonly class="form-control">
+                                                        </div>
+                                                        <!-- chamando o valor de perfil -->
+                                                        <div class="col-md-12 form-group">
+                                                            <label>Perfil</label>
+                                                            <input type="text" name="txtperfil" value='<?php echo $dados['perfil'];?>' readonly class="form-control">
+                                                        </div>
+
+                                                        <br>
+                                                        <!-- chamando os botões para ações -->
+                                                        <div style="margin: auto;">
+                                                            <button type="submit" name="btncal" class="btn btn-primary">Excluir</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                <!-- Aqui chama o rodapé, usados para botões, exemplo btnsair -->
+                                                <div class="modal-footer">
+                                                    <button style="color: black" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </td>
+                        </tr>
+                    <?php } ?>    
+                </table>
+            </div>
         </div>
-    </div>
-</section>
-
-
-
-    
+    </section> 
 </body>
 </html>
