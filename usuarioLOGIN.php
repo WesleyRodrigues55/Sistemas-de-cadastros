@@ -32,12 +32,11 @@ include("usuarioLOGICA.php");
         
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            background-image: url(fundo-body.png);
+            background: url(background-body.png);
         }
 
         @media screen and (max-width: 700px) {
             body {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             background-image: url(fundo-mobile.png);
             }
         }
