@@ -15,6 +15,11 @@ include("usuarioLOGICA.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+
     <!-- CSS -->
     <style>
         html,
@@ -26,11 +31,15 @@ include("usuarioLOGICA.php");
         }
         
         body {
-            /* background-color: rgba(91, 91, 245, 0.5); */
-            background-image: url("fundo-body.png");
-            background-attachment: fixed;
-            color: black;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-image: url(fundo-body.png);
+        }
+
+        @media screen and (max-width: 700px) {
+            body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-image: url(fundo-mobile.png);
+            }
         }
         
         #sessao {
@@ -45,66 +54,57 @@ include("usuarioLOGICA.php");
         }
         
         #style {
-            /* border: 1px solid rgb(129, 129, 129); */
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
-            width: 300px;
-            height: 400px;
+            /* border: 1px solid black; */
             margin: auto;
-            /* background-color: rgba(68, 245, 24, 0.1); */
-            background: rgb(255, 255, 255);
+            width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
         }
-        
-        h1 {
-            padding-top: 40px;
+
+        @media screen and (max-width:700px) {
+            #style {
+            /* border: 1px solid black; */
+            margin: auto;
+            width: 350px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+        }
         }
         
         #frm {
-            margin-top: 20px;
-            margin: 20px;
-            
+            text-align: center;
+            margin: 30px;
+            padding: 30px 30px;
         }
         
-        #input {
-            margin: 0 20px 10px 20px;
-            height: 30px;
-            width: 210px;
-            border-radius: 20px;
-            border: 0 none;
-            border-bottom: 1px solid black;
-            background-color: rgba(90, 88, 88, 0.1);
-            outline: 0;
-            color: black;
+        h1 {
+            margin: 10px 0 30px 0;
         }
         
         p {
             font-size: 16px;
+            text-align: left;
+            margin: 20px 0 0 0;
         }
         
-        p>a {
-            color: rgb(27, 149, 224);
-            text-decoration: none;
-        }
-
-        p>a:hover {
-            color: rgb(27, 149, 224);
-            text-decoration: underline ;
+        input {
+            width: 300px;
+            height: 30px;
         }
         
-        #btnentrar {
-            padding: 10px;
-            margin-top: 20px;
-            background-color: rgb(27, 149, 224);;
-            border: none;
-            border-radius: 20px;
-            width: 150px;
-            color: white;
+        button {
+            width: 200px;
+            height: 45px;
+            margin: 20px 0 20px 0;
         }
         
-        #btnentrar:hover {
-            background-color: rgb(27, 149, 204);;
-            color: white;
-            cursor: pointer;
+        #barra {
+            border-bottom: 1px solid black;
+            opacity: 0.2;
+            width: 100%;
         }
+        
+        h5 {}
     </style>
 </head>
 
@@ -113,17 +113,16 @@ include("usuarioLOGICA.php");
     <div id="sessao">
         <div id="campo-sessao">
             <div id="style">
-                <div id="style1">
-                    <div id="style2">
-                        <h1>Entrar no sistema</h1>
-                        <form method="post" name="frmLogin" id="frm">
-                            <p>Usuário</p>
-                            <input type="text" name="usuario" id="input">
-                            <p>Senha</p>
-                            <input type="password" name="senha" id="input"><br>
-                            <input type="submit" value="Entrar" id="btnentrar">
-                            <hr color="rgba(241, 235, 235, 0.2)" size="1px" width="80%" style="opacity: 0.2; margin-top: 20px">
-                            <p><a href="">Esqueceu sua senha?</a></p>
+                <form method="post" class="form-group" name="frmLogin" id="frm">
+                    <h1>Iniciar sessão</h1>
+                    <p>Usuário</p>
+                    <input type="text" class="form-control" name="usuario" id="input">
+                    <p>Senha</p>
+                    <input type="password" class="form-control" name="senha" id="input"><br>
+                    <button type="submit" class="btn btn-primary" id="btnentrar" style="font-size: 18px">Entrar</button>
+                    <br>
+                    <h1 id="barra"></h1>
+                    <h5><a href="">Esqueceu sua senha?</a></h5>
 
                             <?php 
     if ($_POST) {
@@ -140,7 +139,6 @@ include("usuarioLOGICA.php");
         }
     }
     ?>
-                        </form>
                         </form>
                     </div>
                 </div>
