@@ -1,9 +1,15 @@
 <?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
+<?php
 // incluí a conexão com o banco
 include("conexao.php");
 
 // recebe os dados do formulário
 $descricao = $_POST['txtdescricao'];
+$img = $_POST['img'];
 $quantidade = $_POST['txtquantidade'];
 $preco = $_POST['txtpreco'];
 $lote = $_POST['txtlote'];
@@ -11,8 +17,9 @@ $dataValidade = $_POST['txtvalidade'];
 $codBarras = $_POST['txtcodigoBarras'];
 $fornecedor = $_POST['txtfornecedor'];
 
+
 // insere os dados obtidos no formulário pro banco
-$sqlinsert = "insert into cad_produto values (0, '$descricao', '$quantidade', '$preco', '$lote', '$dataValidade', '$codBarras', '$fornecedor')";
+$sqlinsert = "insert into cad_produto values (0, '$descricao', '$img', '$quantidade',  '$preco', '$lote', '$dataValidade', '$codBarras', '$fornecedor')";
 
 // executando instrução SQL (para tratar erros)
 // Diz que: se os inputs não receberem nenhum valor, dará um alerta de erro, caso conmtrário, um alerta de sucesso!

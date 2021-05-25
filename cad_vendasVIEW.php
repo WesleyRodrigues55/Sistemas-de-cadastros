@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<!-- Sessão de login -->
 <?php
 include("usuarioLOGICA.php");
 //verifica se foi logado ou não
 verificaUsuario();
-?>
-<html lang="en">
 
+include "conexao.php";
+
+// criar função onde vai pegar para fazer a listagem dos clientes
+function listarClientes($conexao)
+{ 
+    $listadeclientes = array();
+    $resultado = mysqli_query($conexao,"select * from cad_cliente order by nome");
+
+ // percorrer a lista
+    while($cliente = mysqli_fetch_assoc($resultado))
+    {
+        array_push($listadeclientes, $cliente);         
+    }
+    return $listadeclientes; 
+}
+// variável que recebe o retorno da lista da função
+$listacli = listarClientes($conexao);
+?>
+
+<html>    
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página inicial</title>
+  <title>Cadatro de Usuarios</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -22,8 +38,8 @@ verificaUsuario();
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
-    <!-- CSS -->
-    <style>
+ <!-- CSS -->
+ <style>
         body {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
@@ -70,12 +86,11 @@ verificaUsuario();
         <div class="row" id="nav-desktop">
 
             <div class=" col-xs-2 col-sm-2 col-md-2">
-                <!-- icone sair -->
+                <!-- icone home -->
                 <div class="icones">
-                    <button type="buttom" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Clique aqui para sair."><a href="usuarioLOGOUT.php"><svg xmlns="http://www.w3.org/2000/svg" id="icone" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
-                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
-                    </svg></a><p>Sair</p></button>
+                    <button type="buttom" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="clique aqui para ir ao menu inicial"><a href="index.php"><svg xmlns="http://www.w3.org/2000/svg" id="icone" width="30" height="30" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+            </svg></a><br><p>Home</p></button>
                 </div>
             </div>
 
@@ -133,37 +148,34 @@ verificaUsuario();
     </nav>
     <!-- fim nav bar -->
 
-    <section class="container">
-        <h1  style="color: rgb(135, 135, 197)">Bem vindo ao menu principal</h1>
-        <h5>Aqui você encontra tudo o que precisa saber sobre os cadastros de dúvidas.</h5>
-
-        <div class="row" style="margin-top: 100px;">
-
-            <div class="col-md-12" style="padding: 30px;">
-                <h2 style="color: rgb(135, 135, 197)">Fazer compras</h2>
-                <h6>Quer realizar compras em nosso site?<br><br> faça sua primeira compra clicando no botão a baixo:</h6>
-                <button class="btn btn-success"><a href="cad_vendasVIEW.php" style="text-decoration: none; color: white">Iniciar uma venda</a></button>
+<div class="container card-body card" style="padding: 50px; margin-top: 200px">
+    <h2 style="text-align: center">Venda de Produtos</h2>
+    
+    <form method="get" action="cad_vendasCONEXAO.php" class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Cliente</label>
+                <select class="form-control" name="txtcliente">
+                    <?php foreach($listacli as $cli ) { ?>
+                        <option>...</option>
+                        <option value="<?php echo $cli['id']; ?>"><?php echo $cli['nome'];?></option>
+                    <?php } ?>
+                </select>
             </div>
 
-            <div class="col-md-6" style="padding: 30px;">
-                <h2 style="color: rgb(135, 135, 197)">Fazer compras</h2>
-                <h6>Quer realizar compras em nosso site?<br><br> faça sua primeira compra clicando no botão a baixo:</h6>
-                <button class="btn btn-info"><a href="cad_vendasEntrada.php" style="text-decoration: none; color: white">Dar Entrada</a></button>
+            <div class="col-md-6">
+                <label>Observação</label>
+                <input class="form-control" type="text" name="txtobs">
             </div>
 
-            <div class="col-md-6" style="padding: 30px;">
-                <h2 style="color: rgb(135, 135, 197)">O que fazemos?</h2>
-                <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ipsa nemo voluptates dolores earum explicabo necessitatibus quam eveniet incidunt nihil, quis quia ducimus odit! Deserunt unde quod nihil voluptas cumque!</h6>
+            <div class="col-md-12" style="margin: 20px; text-align: center">
+                <button class="btn btn-primary" type="submit" name="btncal">Iniciar venda</button>
+                <button class="btn btn-danger" onclick="javascript: location.href='index.php';">Voltar</button>
             </div>
-
-            <div class="col-md-12" style="padding: 30px;">
-                <h2 style="color: rgb(135, 135, 197)">Novidades</h2>
-                <h6>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi inventore laudantium maxime praesentium quisquam reprehenderit! Voluptatum, alias vero animi laboriosam numquam blanditiis inventore earum rem illo optio, ipsum similique odio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi ipsa nemo voluptates dolores earum explicabo necessitatibus quam eveniet incidunt nihil, quis quia ducimus odit! Deserunt unde quod nihil voluptas cumque!</h6>
-            </div>
-        
         </div>
-    </section>
+    <!-- FIM ROW -->
+    </form>
+</div>
 
 </body>
-
 </html>

@@ -1,3 +1,8 @@
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -126,6 +131,15 @@
   <div class="form-group col-md-6">
     <label>fornecedor</label>
     <input type="text" class="form-control" id="fornecedor" placeholder="Digite o nome do fornecedor" name="txtfornecedor">
+  </div>
+<!-- IMG PRODUTO -->
+  <div class="form-group col-md-4">
+    <label>Imagem do produto</label>
+    <!-- tudo tem que estar na pasta img do xamp -->
+    <!-- podemos usar esse exemplo -->
+    <!-- <input type="text" class="form-control" id="imagem" name="img"> -->
+    <!-- ou esse (porém esse armazena a imagem no banco) -->
+    <input type="file" name="img" id="img">
   </div>
 
 </div>

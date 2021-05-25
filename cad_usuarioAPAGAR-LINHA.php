@@ -1,4 +1,8 @@
-
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <?php
 
 include_once("conexao.php");

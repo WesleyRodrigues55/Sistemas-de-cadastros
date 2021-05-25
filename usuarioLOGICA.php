@@ -1,3 +1,4 @@
+
 <?php
 //inicia a asessão de login
 session_start();
@@ -32,3 +33,5 @@ function usuarioLoga($email) {
 function logout() {
     session_destroy();
 }
+
+?>

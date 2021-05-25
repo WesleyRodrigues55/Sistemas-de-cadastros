@@ -1,4 +1,9 @@
 <?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
+<?php
 //inclui  a conexão com o banco
 include("conexao.php");
 
@@ -7,7 +12,7 @@ $pesquisar = $_GET['pesquisa'];
 
 if ($pesquisar != "") {
 //Aqui selecionaremos a tabela usuario e suas linhas
-$consulta = "SELECT * FROM cad_fornecedor WHERE razao_social='$pesquisar'";
+$consulta = "SELECT * FROM cad_fornecedor WHERE razao_social like '%$pesquisar%'";
 } else {
     //caso a pesquisa seja nula, selecionaremos a tabela novamente
   $consulta = "SELECT * FROM cad_fornecedor";
@@ -134,17 +139,26 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                     <div class="col-md-12">
                         <h1 style="text-align: center;">Tabela com os fornecedores cadastrados</h1>
                         <hr>
-                        <form class="form-inline my-2 my-lg-0 pl-3-lg" action="cad_fornecedorLISTA.php">
-
-                             <!-- caixa de pesquisa -->
-                            <input class="form-control" type="search" placeholder="Pesquisar" id="pesquisa" name="pesquisa" aria-label="Search" style="width: 500px; padding: 20px;">
-                            <button class="btn ml-1" type="submit" style="padding: 10px;">
-                                <svg id="icone-search" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </button>
-
+                        <div style="display: flex;justify-content: space-between;">
+                        <form class="form-inline my-2 my-lg-0 pl-3-lg" action="cad_fornecedorLISTA.php">           
+                        <!-- caixa de pesquisa -->
+                        <input class="form-control" type="search" placeholder="Pesquisar" id="pesquisa" name="pesquisa" aria-label="Search" style="width: 500px; padding: 20px;">
+                        <button class="btn ml-1" type="submit" style="padding: 10px;">
+                            <svg id="icone-search" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
                         </form>
+
+                        <a href="cad_fornecedorRELATORIO.php" target="_blank"  style="color: white; text-decoration: none;">
+                            <button type="button" class="btn btn-info" style="padding: 10px;">
+                                <svg style="margin: 0 10px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar2-range" viewBox="0 0 16 16">
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM9 8a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1zm-8 2h4a1 1 0 1 1 0 2H1v-2z"/>
+                                </svg>Gerar relatório
+                            </button>
+                        </a>
+                    </div>
                         <!-- fim form -->
                         <br><br>
                         <!-- inicio tabela -->
@@ -154,18 +168,18 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                     <td>Código</td>
                                     <td>Razão social</td>
                                     <td>Data de abertura</td>
-                                    <td>Tipo</td>
-                                    <td>Regimes tributários</td>
+                                    <!-- <td>Tipo</td> -->
+                                    <!-- <td>Regimes tributários</td> -->
                                     <td>CNPJ</td>
-                                    <td>IE</td>
+                                    <!-- <td>IE</td>
                                     <td>Isento</td>
                                     <td>IM</td>
-                                    <td>Vendedor</td>
+                                    <td>Vendedor</td> -->
                                     <td>E-mail</td>
                                     <td>Celular</td>
-                                    <td>Telefone 1</td>
-                                    <td>Telefone 2</td>
-                                    <td>CEP</td>
+                                    <!-- <td>Telefone 1</td> -->
+                                    <!-- <td>Telefone 2</td> -->
+                                    <!-- <td>CEP</td>
                                     <td>Endereço</td>
                                     <td>Número</td>
                                     <td>Complemento</td>
@@ -173,11 +187,10 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                     <td>Cidade</td>
                                     <td>Estado</td>
                                     <td>Site</td>
-                                    <td>E-mail envio XML</td>
-                                    <td>Data de cadastro</td>
+                                    <td>E-mail envio XML</td> -->
+                                    <!-- <td>Data de cadastro</td> -->
                                     <td>Observações</td>
                                     <td>Ação</td>
-                                    <td></td>
                                 </tr>
                             </thead>
                             <?php while($dado = $con->fetch_array()) {?>
@@ -185,37 +198,35 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                     <td id="td1"><?php echo $dado['id'];?></td>
                                     <td><?php echo $dado['razao_social'];?></td>
                                     <td><?php echo $dado['data_abertura'];?></td>
-                                    <td><?php echo $dado['tipo'];?></td>
-                                    <td><?php echo $dado['regime'];?></td>
+                                    <!-- <td><//?php echo $dado['tipo'];?></td> -->
+                                    <!-- <td><//?php echo $dado['regime'];?></td> -->
                                     <td><?php echo $dado['CNPJ'];?></td>
-                                    <td><?php echo $dado['IE'];?></td>
-                                    <td><?php echo $dado['ISENTO'];?></td>
-                                    <td><?php echo $dado['IM'];?></td>
-                                    <td><?php echo $dado['vendedor'];?></td>
+                                    <!-- <td><//?php echo $dado['IE'];?></td>
+                                    <td><//?php echo $dado['ISENTO'];?></td>
+                                    <td><//?php echo $dado['IM'];?></td>
+                                    <td><//?php echo $dado['vendedor'];?></td> -->
                                     <td><?php echo $dado['email'];?></td>
                                     <td><?php echo $dado['celular'];?></td>
-                                    <td><?php echo $dado['telefone1'];?></td>
-                                    <td><?php echo $dado['telefone2'];?></td>
-                                    <td><?php echo $dado['CEP'];?></td>
-                                    <td><?php echo $dado['endereco'];?></td>
-                                    <td><?php echo $dado['numero'];?></td>
-                                    <td><?php echo $dado['complemento'];?></td>
-                                    <td><?php echo $dado['bairro'];?></td>
-                                    <td><?php echo $dado['cidade'];?></td>
-                                    <td><?php echo $dado['estado'];?></td>
-                                    <td><?php echo $dado['site'];?></td>
-                                    <td><?php echo $dado['email_cobranca'];?></td>
-                                    <td><?php echo $dado['data_cadastro'];?></td>
+                                    <!-- <td><//?php echo $dado['telefone1'];?></td> -->
+                                    <!-- <td><//?php echo $dado['telefone2'];?></td> -->
+                                    <!-- <td><//?php echo $dado['CEP'];?></td>
+                                    <td><//?php echo $dado['endereco'];?></td>
+                                    <td><//?php echo $dado['numero'];?></td>
+                                    <td><//?php echo $dado['complemento'];?></td>
+                                    <td><//?php echo $dado['bairro'];?></td>
+                                    <td><//?php echo $dado['cidade'];?></td>
+                                    <td><//?php echo $dado['estado'];?></td>
+                                    <td><//?php echo $dado['site'];?></td>
+                                    <td><//?php echo $dado['email_cobranca'];?></td> -->
+                                    <!-- <td><//?php echo $dado['data_cadastro'];?></td> -->
                                     <td><?php echo $dado['observacao'];?></td>
 
-                                    <td>
-                                        <button type="button" class="btn btn-primary"><a href="cad_fornecedorALTERARVIEW.php?codigo=<?php echo $dado['id']; ?>" style="color: white; text-decoration: none;">
+                                    <td style="display: flex">
+                                        <button type="button" class="btn btn-primary" style="margin: 10px;"><a href="cad_fornecedorALTERARVIEW.php?codigo=<?php echo $dado['id']; ?>" style="color: white; text-decoration: none;">
                                             Alterar</a>
                                         </button>
-                                    </td>
 
-                                    <td>
-                                        <button id="botao-filmes" type="button" class="btn btn-danger" data-toggle="modal" data-target="#idmodal<?php echo $dado['id']; ?>">
+                                        <button id="botao-filmes" type="button" class="btn btn-danger" data-toggle="modal" data-target="#idmodal<?php echo $dado['id']; ?>" style="margin: 10px;">
                                             Excluir
                                         </button>
 
@@ -225,8 +236,8 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content" id="modal-color">
                                                     <!-- Aqui chama o título do modal -->
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">Exclusão</h5>
+                                                    <div class="modal-header" style="margin: auto">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Deseja mesmo excluir este fornecedor?</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -280,31 +291,31 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                                                     <input type="date" class="form-control" id="data-abertura" name="txtdata-abertura" value='<?php echo $dado['data_abertura'];?>' readonly>
                                                                 </div>
                                                                 <!-- TIPO -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Tipo</label>
                                                                     <select class="form-control" id="combo" name="txttipo" readonly>
                                                                         <option><?php echo $dado['tipo'];?></option>
                                                                     </select>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- REGIME TRIBUTÁRIO -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Rigimes tributários</label>
                                                                     <select class="form-control" id="combo2" name="txtregime" readonly>
                                                                         <option><?php echo $dado['regime'];?></option>
                                                                 </select>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- CNPJ -->
                                                                 <div class="form-group col-md-6">
                                                                     <label>CNPJ</label>
                                                                     <input type="text" class="form-control" id="cnpj" name="txtcnpj" value='<?php echo $dado['CNPJ'];?>' readonly>
                                                                 </div>
                                                                 <!-- INSCRIÇÃO ESTADUAL -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Inscrição estadual</label>
                                                                     <input type="text" class="form-control" id="ie" name="txtie" value='<?php echo $dado['IE'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- ISENTO -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Isento</label>
                                                                     <select class="form-control" id="combo" name="txtisento" readonly>
                                                                         <option><?php echo $dado['ISENTO'];?></option>
@@ -312,17 +323,17 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                                                         <option>Contribuente</option>
                                                                         <option>Isento</option>
                                                                     </select>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- INSCRIÇÃO MUNICIPAL -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Inscrição municipal</label>
                                                                     <input type="text" class="form-control" id="im" name="txtim"  value='<?php echo $dado['IM'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- VENDEDOR / REPRESENTANTE -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Vendedor / Representante</label>
                                                                     <input type="text" class="form-control" id="vendedor" name="txtvendedor"  value='<?php echo $dado['vendedor'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- E-MAIL -->
                                                                 <div class="form-group col-md-6">
                                                                     <label>E-MAIL</label>
@@ -334,83 +345,84 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                                                     <input type="text" class="form-control" id="celular" name="txtcelular"  value='<?php echo $dado['celular'];?>' readonly>
                                                                 </div>
                                                                 <!-- TELEFONE 1 -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>TELEFONE 1</label>
                                                                     <input type="text" class="form-control" id="telefone1" name="txttelefone1"  value='<?php echo $dado['telefone1'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- TELEFONE 2 -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>TELEFONE 2</label>
                                                                     <input type="text" class="form-control" id="telefone2" name="txttelefone2"  value='<?php echo $dado['telefone2'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- CEP -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>CEP</label>
                                                                     <input type="text" class="form-control" id="cep" name="txtcep"  value='<?php echo $dado['CEP'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- ENDEREÇO -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Endereço</label>
                                                                     <input type="text" class="form-control" id="endereco" name="txtendereco"  value='<?php echo $dado['endereco'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- NÚMERO -->
-                                                                <div class="form-group col-md-3">
+                                                                <!-- <div class="form-group col-md-3">
                                                                     <label>Número</label>
                                                                     <input type="text" class="form-control" id="numero" name="txtnumero"  value='<?php echo $dado['numero'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- COMPLEMENTO -->
-                                                                <div class="form-group col-md-9">
+                                                                <!-- <div class="form-group col-md-9">
                                                                     <label>Complemento</label>
                                                                     <input type="text" class="form-control" id="complemento" name="txtcomplemento"  value='<?php echo $dado['complemento'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- BAIRRO -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Bairro</label>
                                                                     <input type="text" class="form-control" id="bairro" name="txtbairro"  value='<?php echo $dado['bairro'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- CIDADE -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Cidade</label>
                                                                     <input type="text" class="form-control" id="cidade" name="txtcidade"  value='<?php echo $dado['cidade'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- ESTADO -->
-                                                                <div class="form-group col-md-3">
+                                                                <!-- <div class="form-group col-md-3">
                                                                     <label>Estado</label>
                                                                     <input type="text" class="form-control" id="estado" name="txtestado"  value='<?php echo $dado['estado'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- SITE -->
-                                                                <div class="form-group col-md-9">
+                                                                <!-- <div class="form-group col-md-9">
                                                                     <label>Site</label>
                                                                     <input type="text" class="form-control" id="site" name="txtsite"  value='<?php echo $dado['site'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- E-MAIL DE COBRANÇA PARA ENVIO XML -->
-                                                                <div class="form-group col-md-12">
+                                                                <!-- <div class="form-group col-md-12">
                                                                     <label>E-mail de cobrança para envio do XML</label>
                                                                     <input type="email" class="form-control" id="emailcobranca" name="txtemail-cobranca"  value='<?php echo $dado['email_cobranca'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- DATA DE CADASTRO -->
-                                                                <div class="form-group col-md-6">
+                                                                <!-- <div class="form-group col-md-6">
                                                                     <label>Data de cadastro</label>
                                                                     <input type="date" class="form-control" id="data-cadastro" name="txtdata-cadastro"  value='<?php echo $dado['data_cadastro'];?>' readonly>
-                                                                </div>
+                                                                </div> -->
                                                                 <!-- OBSERVAÇÕES -->
                                                                 <div class="form-group col-md-12">
                                                                     <label>Observação</label>
-                                                                    <textarea class="form-control" rows="5" id="observacao" name="txtobservacao" id="observacao" readonly><?php echo $dado['observacao'];?></textarea>
+                                                                    <textarea class="form-control" rows="3" id="observacao" name="txtobservacao" id="observacao" readonly><?php echo $dado['observacao'];?></textarea>
                                                                 </div>
 
                                                                 <br>
                                                                 <!-- chamando os botões para ações -->
                                                                 <div style="margin: auto;">
-                                                                    <button type="submit" name="btncal" class="btn btn-danger">Excluir</button>
+                                                                    <button style="padding: 5px 20px;" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                    <button style="padding: 5px 20px;" type="submit" name="btncal" class="btn btn-primary">Apagar</button>
                                                                 </div>                                     
                                                             </div>
                                                         </form>
 
                                                         <!-- Aqui chama o rodapé, usados para botões, exemplo btnsair -->
-                                                        <div class="modal-footer">
+                                                        <!-- <div class="modal-footer">
                                                             <button style="color: black" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>

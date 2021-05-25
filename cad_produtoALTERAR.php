@@ -1,3 +1,8 @@
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +25,7 @@ include_once("conexao.php");
 
 $id = $_POST['txtid'];
 $descricao = $_POST['txtdescricao'];
+$img = $_POST['img'];
 $quant = $_POST['txtquant'];
 $preco = $_POST['txtpreco'];
 $lote = $_POST['txtlote'];
@@ -27,7 +33,7 @@ $data = $_POST['txtdata'];
 $codBarras = $_POST['txtcodBarras'];
 $fornecedor = $_POST['txtfornecedor'];
 
-$sqlupdate = "update cad_produto set descricao='$descricao', quantidade='$quant', preco='$preco', lote='$lote', data_validade='$data', cod_barras='$codBarras', fornecedor='$fornecedor' where id=$id";
+$sqlupdate = "update cad_produto set descricao='$descricao', img_produto='$img', quantidade='$quant', preco='$preco', lote='$lote', data_validade='$data', cod_barras='$codBarras', fornecedor='$fornecedor' where id=$id";
 
 //instruções
 $resultado = @mysqli_query($conexao,$sqlupdate);

@@ -1,3 +1,8 @@
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -76,12 +81,12 @@
             </div>
 
             <div class="col-md-2">
-                <!-- icone usuario -->
+                <!-- icone produto -->
                 <div class="icones">
-                    <button type="buttom" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Clique aqui para cadastrar um novo usuario"><a href="cad_usuarioVIEW.php"><svg xmlns="http://www.w3.org/2000/svg" id="icone" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-            </svg></a><br><p>Cadastrar outro usuário</p></button>
+                    <button type="buttom" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Clique aqui para cadastrar um novo usuario"><a href="cad_produtoVIEW.php"><svg xmlns="http://www.w3.org/2000/svg" id="icone" width="30" height="30" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+            </svg></a><br><p>Cadastrar outro produto</p></button>
                 </div>
             </div>
         </div>
@@ -164,12 +169,18 @@ mysqli_close($conexao);
                     <input type="number" name="txtcodBarras" value='<?php echo $dados['cod_barras'];?>' class="form-control">
                 </div>
                 <!-- chamando o valor do fornecedor -->
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
                     <label>Fornecedor</label>
                     <input type="text" name="txtfornecedor" value='<?php echo $dados['fornecedor'];?>' class="form-control">
                 </div>
-                <!-- separação -->
-                <div class="col-md-4"></div>
+                <!-- chamando img do produto -->
+                <div class="col-md-3">
+                <label>Imagem</label>
+                <input type="text" value='<?php echo $dados['img_produto']; ?>' name="img" class="form-control">
+                </div>
+                <div class="col-md-2" style="text-align: left;">
+                    <img src="img/<?php echo $dados['img_produto'];?>" style="width: 50px; height: 50px; border-radius: 100px; margin: 10px; box-shadow: 0 5px 5px 0 #333">
+                </div>
 
                 <br>
                 <!-- chamando os botões para ações -->

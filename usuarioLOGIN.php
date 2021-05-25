@@ -103,7 +103,6 @@ include("usuarioLOGICA.php");
             width: 100%;
         }
         
-        h5 {}
     </style>
 </head>
 

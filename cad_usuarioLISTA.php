@@ -1,4 +1,9 @@
 <?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
+<?php
 // incluí a conexão com o banco
 include("conexao.php");
 
@@ -7,7 +12,7 @@ $pesquisar = $_GET['pesquisa'];
 
 if ($pesquisar != "") {
 //Aqui selecionaremos a tabela usuario e suas linhas
-$consulta = "SELECT * FROM usuario WHERE nome='$pesquisar'";
+$consulta = "SELECT * FROM usuario WHERE nome like '%$pesquisar%'";
 } else {
     //caso a pesquisa seja nula, selecionaremos a tabela novamente
   $consulta = "SELECT * FROM usuario";
@@ -132,17 +137,26 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
         <div class="col-md-12">
             <h1 style="text-align: center;">Tabela com os usuários cadastrados.<h1>
                 <hr>
-                <form class="form-inline my-2 my-lg-0 pl-3-lg" action="cad_usuarioLISTA.php">           
+                <div style="display: flex;justify-content: space-between;">
+                    <form class="form-inline my-2 my-lg-0 pl-3-lg" action="cad_usuarioLISTA.php">           
 
-                <!-- caixa de pesquisa -->
-                 <input class="form-control" type="search" placeholder="Pesquisar" id="pesquisa" name="pesquisa" aria-label="Search" style="width: 500px; padding: 20px;">
-                    <button class="btn ml-1" type="submit" style="padding: 10px;">
-                        <svg id="icone-search" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                        </svg>
-                    </button>
-
-                </form>
+                    <!-- caixa de pesquisa -->
+                    <input class="form-control" method="get" type="search" placeholder="Pesquisar" id="pesquisa" name="pesquisa" aria-label="Search" style="width: 500px; padding: 20px;">
+                        <button class="btn ml-1" type="submit" style="padding: 10px;">
+                            <svg id="icone-search" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <a href="cad_usuarioRELATORIO.php" target="_blank"  style="color: white; text-decoration: none;">
+                        <button type="button" class="btn btn-info" style="padding: 10px;">
+                            <svg style="margin: 0 10px" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar2-range" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM9 8a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1zm-8 2h4a1 1 0 1 1 0 2H1v-2z"/>
+                            </svg>Gerar relatório
+                        </button>
+                    </a>
+                </div>
                 <br><br>
 
                 <!-- começo tabela -->
@@ -152,10 +166,9 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                             <td>Código</td>
                             <td>Nome</td>
                             <td>Email</td>
-                            <td>Senha</td>
+                            <!-- <td>Senha</td> -->
                             <td>Perfil</td>
                             <td>Ação</td>
-                            <td></td>
                         </tr>
                     </thead>
                     <?php while($dado = $con->fetch_array()) { ?>
@@ -163,17 +176,15 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                             <td id="td1"><?php echo $dado['id']; ?></td>
                             <td><?php echo $dado['nome']; ?></td>
                             <td><?php echo $dado['email']; ?></td>
-                            <td><?php echo $dado['senha']; ?></td>
+                            <!-- <td><//?php echo $dado['senha']; ?></td> -->
                             <td><?php echo $dado['perfil']; ?></td>
 
-                            <td> 
-                                <button type="button" class="btn btn-primary"><a href="cad_usuarioALTERARVIEW.php?codigo=<?php echo $dado['id']; ?>" style="color: white; text-decoration: none;">
+                            <td style="display: flex;"> 
+                                <button type="button" class="btn btn-primary" style="margin: 10px"><a href="cad_usuarioALTERARVIEW.php?codigo=<?php echo $dado['id']; ?>" style="color: white; text-decoration: none;">
                                     Alterar</a>
                                 </button>
-                                </td>
 
-                                <td>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#idmodal<?php echo $dado['id']; ?>">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#idmodal<?php echo $dado['id']; ?>" style=" margin: 10px">
                                     Excluir
                                 </button>
 
@@ -183,8 +194,8 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content" id="modal-color">
                                             <!-- Aqui chama o título do modal -->
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Exclusão</h5>
+                                            <div class="modal-header" style="margin: auto;">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Deseja mesmo excluir este usuário?</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -254,15 +265,16 @@ $con = @mysqli_query($conexao, $consulta) or die($mysqli->error);
                                                         <br>
                                                         <!-- chamando os botões para ações -->
                                                         <div style="margin: auto;">
-                                                            <button type="submit" name="btncal" class="btn btn-danger">Excluir</button>
+                                                            <button style="padding: 5px 20px;" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                            <button style="padding: 5px 20px;" type="submit" name="btncal" class="btn btn-primary">Apagar</button>
                                                         </div>
                                                     </div>
                                                 </form>
 
                                                 <!-- Aqui chama o rodapé, usados para botões, exemplo btnsair -->
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                     <button style="color: black" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>

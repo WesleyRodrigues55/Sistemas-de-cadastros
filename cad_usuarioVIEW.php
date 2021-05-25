@@ -1,3 +1,8 @@
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -89,39 +94,41 @@
 
 <form method="post" action="cad_usuarioCONEXAO.php">
 
-<h1>Cadastro de usuário</h1>
+  <h1>Cadastro de usuário</h1>
 
-<div class="row">
+  <div class="row">
 
-<!-- INPUT NOME -->
-  <div class="form-group col-md-6">
-    <label>Nome</label>
-    <input type="text" class="form-control" id="nome" placeholder="Digite seu nome..." name="txtnome">
+  <!-- INPUT NOME -->
+    <div class="form-group col-md-6">
+      <label>Nome</label>
+      <input type="text" class="form-control" id="nome" placeholder="Digite seu nome..." name="txtnome">
+    </div>
+  <!-- INPUT E-MAIL -->
+    <div class="form-group col-md-5">
+      <label>Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Digite seu email..." name="txtemail">
+    </div>
+  <!-- INPUT SENHA -->
+    <div class="form-group col-md-6">
+      <label>Senha</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Digite sua senha..." name="txtsenha">
+    </div>
+  <!-- INPUT PERFIL -->
+    <div class="form-group col-md-3">
+      <label>Perfil</label>
+      <select class="form-control" name="txtperfil" id="combo">
+        <option value="Adminstrador">Adminstrador</option>
+        <option value="Usuario">Usuário</option>
+      </select>
+    </div>
   </div>
-<!-- INPUT E-MAIL -->
-  <div class="form-group col-md-5">
-    <label>Email</label>
-    <input type="email" class="form-control" id="email" placeholder="Digite seu email..." name="txtemail">
-  </div>
-<!-- INPUT SENHA -->
-  <div class="form-group col-md-6">
-    <label>Senha</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Digite sua senha..." name="txtsenha">
-  </div>
-<!-- INPUT PERFIL -->
-  <div class="form-group col-md-3">
-    <label>Perfil</label>
-    <select class="form-control" name="txtperfil" id="combo">
-      <option value="Adminstrador">Adminstrador</option>
-      <option value="Usuario">Usuário</option>
-    </select>
-  </div>
-</div>
-<br>
-<button type="submit" name="btncal" class="btn btn-primary" >cadastrar</button>
-<button type="button" name="btnvoltar" onclick="javascript: location.href='Index.php';" class="btn btn-danger">voltar</button>
-
+  <br>
+  <button type="submit" name="btncal" class="btn btn-primary">Cadastrar</button>
+  <button type="button" name="btnvoltar" onclick="javascript: location.href='Index.php';" class="btn btn-danger">voltar</button>
 </form>
+
+
+
 
 </section>  
 </body>

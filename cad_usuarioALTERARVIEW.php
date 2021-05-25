@@ -1,3 +1,8 @@
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -154,9 +159,6 @@
                     <label>Perfil</label>
                     <select class="form-control" name="txtperfil" id="combo">
                         <option><?php echo $dados['perfil'] ?></option>
-                        <option>...</option>
-                        <option>Adminstrador</option>
-                        <option>Usuário</option>
                     </select>
                 </div>
 
@@ -164,8 +166,8 @@
                 <!-- chamando os botões para ações -->
                 <div style="margin: auto;">
                     <button type="submit" name="btncal" class="btn btn-primary">Salvar</button>
-                    <button type="reset" name="btnlimpar" class="btn btn-danger">limpar</button>
-                    <button type="button" name="btnvoltar" onclick="javascript: location.href='Index.php';" class="btn btn-default">voltar</button>
+                    <!-- <button type="reset" name="btnlimpar" class="btn btn-danger">limpar</button> -->
+                    <button type="button" name="btnvoltar" onclick="javascript: location.href='cad_usuarioLISTA.php';" class="btn btn-default">voltar</button>
                 </div>
    
             </div>
@@ -174,3 +176,4 @@
 
 </body>
 </html>
+

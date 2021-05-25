@@ -1,4 +1,9 @@
 <?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
+<?php
 //incluindo a conexão com o banco "ds"
 include("conexao.php");
 

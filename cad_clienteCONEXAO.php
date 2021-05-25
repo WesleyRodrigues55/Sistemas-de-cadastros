@@ -1,4 +1,9 @@
 <?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
+<?php
 include("conexao.php");
 
 $nome = $_POST['txtnome'];

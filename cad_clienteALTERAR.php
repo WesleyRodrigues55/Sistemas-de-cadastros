@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+?>
 <html lang="en">
 <head>
 <meta charset="UTF-8">

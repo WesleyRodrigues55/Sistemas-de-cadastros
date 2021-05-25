@@ -1,13 +1,18 @@
+<!-- Sessão de login -->
 <?php
+include("usuarioLOGICA.php");
+//verifica se foi logado ou não
+verificaUsuario();
+
 // incluí a conexão com o banco
 include("conexao.php");
+
 
 // recebe os dados do formulário
 $nome = $_POST['txtnome'];
 $email = $_POST['txtemail'];
 $senha = $_POST['txtsenha'];
 $perfil = $_POST['txtperfil'];
-
 
 // insere os dados obtidos no formulário pro banco
 $sqlinsert = "insert into usuario values (0, '$nome', '$email', '$senha', '$perfil')";
